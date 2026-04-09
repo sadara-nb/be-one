@@ -13,7 +13,7 @@
 // Hint: look at products.controller.ts for the full pattern.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Controller } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Param, ParseArrayPipe, ParseIntPipe, Post} from '@nestjs/common';
 // TODO: import the decorators you need (Get, Post, Patch, Delete, Param, Body, etc.)
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -24,16 +24,20 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   // TODO: GET /tasks
+  @Get()
   findAll() {
     return this.tasksService.findAll();
   }
 
   // TODO: GET /tasks/:id
-  findOne(id: number) {
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) { //mapea el valor id para poder recibirlo bien
     return this.tasksService.findOne(id);
   }
 
   // TODO: POST /tasks  (status 201)
+  @Post()
+  @HttpCode(HttpStatus.CREATED) //
   create(createTaskDto: CreateTaskDto) {
     return this.tasksService.create(createTaskDto);
   }

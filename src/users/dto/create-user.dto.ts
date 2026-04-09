@@ -16,3 +16,30 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // TODO: your code here
+
+import { IsNotEmpty, IsOptional, IsString, IsInt, MinLength, MaxLength, IsEmail, IsEnum} from "class-validator";
+const UserRole = ['student', 'teacher', 'admin'] as const;
+type UserRole = (typeof UserRole)[number];
+
+export class UpdateUser {
+
+    @IsString()
+    @MinLength(2)
+    @MaxLength(50)
+    name: string;
+
+    @IsOptional()
+    @IsEmail()
+    email: string
+
+    @IsInt()
+    @MinLength(1)
+    @MaxLength(120)
+    age: number
+
+    @IsOptional()
+    @IsEnum(UserRole)
+    role?: UserRole;
+
+
+}

@@ -10,4 +10,5 @@ import { UsersModule } from './users/users.module';
     UsersModule, // TODO (Activity 3): you will build this module from scratch
   ],
 })
+
 export class AppModule {}
