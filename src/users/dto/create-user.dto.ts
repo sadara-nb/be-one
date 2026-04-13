@@ -19,9 +19,9 @@
 
 import { IsNotEmpty, IsOptional, IsString, IsInt, MinLength, MaxLength, IsEmail, IsEnum} from "class-validator";
 const UserRole = ['student', 'teacher', 'admin'] as const;
-type UserRole = (typeof UserRole)[number];
+type UserRole = (typeof UserRole)[number]; //las opciones del enum se toman como números por detrás en la DB
 
-export class UpdateUser {
+export class CreateUserDto {
 
     @IsString()
     @MinLength(2)
@@ -40,6 +40,7 @@ export class UpdateUser {
     @IsOptional()
     @IsEnum(UserRole)
     role?: UserRole;
-
+//se debe poner el decorator de IsOptional y también el ?
+//el decorador es para el request y el ? para validación en la DB
 
 }
