@@ -11,7 +11,7 @@
 //   DELETE /users/:id
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 // TODO: import all decorators and pipes you need
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -41,12 +41,15 @@ create(createUserDto: CreateUserDto) {
   return this.usersService.create(createUserDto);
 }
 
+@Patch(':id')
+//el patch es para actualizar un recurso existente
 update(id: number, updateUserDto: UpdateUserDto) {
   //el usersService tiene un método update que recibe el id del usuario a actualizar y el DTO con los datos a actualizar, y devuelve el usuario actualizado. 
   //el usersService es un objeto que se inyecta en el constructor de la clase UsersController, y se puede usar para llamar a sus métodos desde las rutas del controlador.
   return this.usersService.update(id, updateUserDto)
 }
 
+@Delete(':id')
 remove(id: number) {
   return this.usersService.remove(id)
 }
